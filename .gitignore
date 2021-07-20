@@ -36,3 +36,17 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Non-Repo Files
+starRatingTestContainer/
+.vscode
+config/
+manifest/
+scripts/
+.eslintignore
+.forceignore
+.prettierignore
+.prettierrc
+jest.config.js
+package.json
+sfdx-project.json
