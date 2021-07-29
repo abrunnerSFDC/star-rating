@@ -1,6 +1,4 @@
-import { LightningElement, api, track, wire } from 'lwc';
-import { MessageContext, publish } from 'lightning/messageService';
-import SELECTED_RATING_MC from '@salesforce/messageChannel/Selected_Rating__c'
+import { LightningElement, api, track } from 'lwc';
 
 export default class StarRatingInteractive extends LightningElement {
     @api defaultRating;
@@ -10,8 +8,6 @@ export default class StarRatingInteractive extends LightningElement {
     @track starState3 = "default";
     @track starState4 = "default";
     @track starState5 = "default";
-
-    @wire (MessageContext) messageContext;
 
     connectedCallback() {
         switch (this.defaultRating) {
@@ -171,7 +167,10 @@ export default class StarRatingInteractive extends LightningElement {
                 break;
         }
 
-        const payload = {rating: this.selectedRating};
-        publish(this.messageContext, SELECTED_RATING_MC, payload);
+        const selectedEvent = new CustomEvent(
+            'ratingclick',
+            {detail: this.selectedRating}
+        );
+        this.dispatchEvent(selectedEvent);
     }
 }

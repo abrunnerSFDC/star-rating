@@ -39,6 +39,7 @@ $RECYCLE.BIN/
 
 # Non-Repo Files
 starRatingTestContainer/
+selectedRatingMessageTest/
 .vscode
 config/
 manifest/
