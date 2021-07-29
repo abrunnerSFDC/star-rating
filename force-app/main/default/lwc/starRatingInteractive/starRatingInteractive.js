@@ -2,170 +2,52 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class StarRatingInteractive extends LightningElement {
     @api defaultRating;
+    @api totalStars;
     @track selectedRating;
-    @track starState1 = "default";
-    @track starState2 = "default";
-    @track starState3 = "default";
-    @track starState4 = "default";
-    @track starState5 = "default";
+    @track stars = new Array();
 
     connectedCallback() {
-        switch (this.defaultRating) {
-            case 1:
-                this.starState1 = "warning";
-                this.starState2 = "default";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 2:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 3:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 4:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "default";
-                break;
-            case 5:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "warning";
-                break;
-            default:
-                this.starState1 = "default";
-                this.starState2 = "default";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-        }
         this.selectedRating = this.defaultRating;
+
+        for (let i = 0; i < this.totalStars; ++i) {
+            if (i < this.selectedRating) {
+                this.stars.push(
+                    {
+                        Index: i,
+                        State: "warning"
+                    }
+                );
+            } else {
+                this.stars.push(
+                    {
+                        Index: i,
+                        State: "default"
+                    }
+                );
+            }
+        }
     }
 
     handleRatingHover(event) {
-        switch(event.target.getAttribute('data-id')) {
-            case "star1":
-                this.starState1 = "warning";
-                this.starState2 = "default";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case "star2":
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case "star3":
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case "star4":
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "default";
-                break;
-            case "star5":
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "warning";
-                break;
-            default:
-                break;
+        for (let i = 0; i < this.totalStars; ++i) {
+            if (i < 1 + +event.target.getAttribute('data-id'))
+                this.stars[i].State = "warning";
+            else
+                this.stars[i].State = "default";
         }
     }
 
     handleRatingHoverOut() {
-        switch(this.selectedRating) {
-            case 1:
-                this.starState1 = "warning";
-                this.starState2 = "default";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 2:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 3:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
-            case 4:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "default";
-                break;
-            case 5:
-                this.starState1 = "warning";
-                this.starState2 = "warning";
-                this.starState3 = "warning";
-                this.starState4 = "warning";
-                this.starState5 = "warning";
-                break;
-            default:
-                this.starState1 = "default";
-                this.starState2 = "default";
-                this.starState3 = "default";
-                this.starState4 = "default";
-                this.starState5 = "default";
-                break;
+        for (let i = 0; i < this.totalStars; ++i) {
+            if (i < this.selectedRating)
+                this.stars[i].State = "warning";
+            else
+                this.stars[i].State = "default";
         }
     }
 
     handleRatingClick(event) {
-        switch(event.target.getAttribute('data-id')) {
-            case "star1":
-                this.selectedRating = 1;
-                break;
-            case "star2":
-                this.selectedRating = 2;
-                break;
-            case "star3":
-                this.selectedRating = 3;
-                break;
-            case "star4":
-                this.selectedRating = 4;
-                break;
-            case "star5":
-                this.selectedRating = 5;
-                break;
-            default:
-                break;
-        }
+        this.selectedRating = 1 + +event.target.getAttribute('data-id');
 
         const selectedEvent = new CustomEvent(
             'ratingclick',
