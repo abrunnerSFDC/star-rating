@@ -6,7 +6,9 @@
         </c-star-rating-interactive>
     </template>
     <template if:false={isInteractive}>
-        <c-star-rating-static rating={rating}>
+        <c-star-rating-static
+            rating={rating}
+            total-stars={totalStars}>
         </c-star-rating-static>
     </template>
 </template>
