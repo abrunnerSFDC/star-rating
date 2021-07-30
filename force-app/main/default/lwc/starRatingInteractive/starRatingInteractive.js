@@ -23,6 +23,9 @@ export default class StarRatingInteractive extends LightningElement {
             case "red":
                 this.filledColor = "error";
                 break;
+            case "white":
+                this.filledColor = "inverse";
+                break;
             default:
                 this.filledColor = "warning";
                 break;
@@ -40,6 +43,9 @@ export default class StarRatingInteractive extends LightningElement {
                 break;
             case "red":
                 this.unfilledColor = "error";
+                break;
+            case "white":
+                this.unfilledColor = "inverse";
                 break;
             default:
                 this.unfilledColor = "default";
