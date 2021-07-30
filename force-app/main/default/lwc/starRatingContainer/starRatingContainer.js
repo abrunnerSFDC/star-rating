@@ -5,6 +5,8 @@ export default class StarRatingContainer extends LightningElement {
     @api totalStars = 5;
     @api size = "medium";
     @api isInteractive = false;
+    @api filledColor = "orange";
+    @api unfilledColor = "grey";
 
     handleRatingClick(event) {
         const selectedEvent = new CustomEvent(

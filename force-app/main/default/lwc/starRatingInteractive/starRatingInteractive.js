@@ -4,10 +4,48 @@ export default class StarRatingInteractive extends LightningElement {
     @api defaultRating;
     @api totalStars;
     @api size;
+    @api filledColor;
+    @api unfilledColor;
     @track selectedRating;
     @track stars = new Array();
 
     connectedCallback() {
+        switch (this.filledColor) {
+            case "grey":
+                this.filledColor = "default";
+                break;
+            case "green":
+                this.filledColor = "success";
+                break;
+            case "orange":
+                this.filledColor = "warning";
+                break;
+            case "red":
+                this.filledColor = "error";
+                break;
+            default:
+                this.filledColor = "warning";
+                break;
+        }
+
+        switch (this.unfilledColor) {
+            case "grey":
+                this.unfilledColor = "default";
+                break;
+            case "green":
+                this.unfilledColor = "success";
+                break;
+            case "orange":
+                this.unfilledColor = "warning";
+                break;
+            case "red":
+                this.unfilledColor = "error";
+                break;
+            default:
+                this.unfilledColor = "default";
+                break;
+        }
+
         this.selectedRating = this.defaultRating;
 
         for (let i = 0; i < this.totalStars; ++i) {
@@ -15,14 +53,14 @@ export default class StarRatingInteractive extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: "warning"
+                        State: this.filledColor
                     }
                 );
             } else {
                 this.stars.push(
                     {
                         Index: i,
-                        State: "default"
+                        State: this.unfilledColor
                     }
                 );
             }
@@ -32,18 +70,18 @@ export default class StarRatingInteractive extends LightningElement {
     handleRatingHover(event) {
         for (let i = 0; i < this.totalStars; ++i) {
             if (i < 1 + +event.target.getAttribute('data-id'))
-                this.stars[i].State = "warning";
+                this.stars[i].State = this.filledColor;
             else
-                this.stars[i].State = "default";
+                this.stars[i].State = this.unfilledColor;
         }
     }
 
     handleRatingHoverOut() {
         for (let i = 0; i < this.totalStars; ++i) {
             if (i < this.selectedRating)
-                this.stars[i].State = "warning";
+                this.stars[i].State = this.filledColor;
             else
-                this.stars[i].State = "default";
+                this.stars[i].State = this.unfilledColor;
         }
     }
 

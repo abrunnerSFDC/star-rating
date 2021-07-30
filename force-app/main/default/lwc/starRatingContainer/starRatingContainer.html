@@ -4,14 +4,18 @@
             default-rating={rating}
             total-stars={totalStars}
             size={size}
-            onratingclick={handleRatingClick}>
+            onratingclick={handleRatingClick}
+            filled-color={filledColor}
+            unfilled-color={unfilledColor}>
         </c-star-rating-interactive>
     </template>
     <template if:false={isInteractive}>
         <c-star-rating-static
             rating={rating}
             total-stars={totalStars}
-            size={size}>
+            size={size}
+            filled-color={filledColor}
+            unfilled-color={unfilledColor}>
         </c-star-rating-static>
     </template>
 </template>
