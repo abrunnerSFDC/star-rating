@@ -38,6 +38,7 @@ $RECYCLE.BIN/
 .env
 
 # Non-Repo Files
+messageChannels/
 starRatingTestContainer/
 selectedRatingMessageTest/
 .vscode

@@ -3,6 +3,7 @@ import { LightningElement, api, track } from 'lwc';
 export default class StarRatingInteractive extends LightningElement {
     @api defaultRating;
     @api totalStars;
+    @api size;
     @track selectedRating;
     @track stars = new Array();
 

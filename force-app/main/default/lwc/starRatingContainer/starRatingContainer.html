@@ -3,13 +3,15 @@
         <c-star-rating-interactive
             default-rating={rating}
             total-stars={totalStars}
+            size={size}
             onratingclick={handleRatingClick}>
         </c-star-rating-interactive>
     </template>
     <template if:false={isInteractive}>
         <c-star-rating-static
             rating={rating}
-            total-stars={totalStars}>
+            total-stars={totalStars}
+            size={size}>
         </c-star-rating-static>
     </template>
 </template>
