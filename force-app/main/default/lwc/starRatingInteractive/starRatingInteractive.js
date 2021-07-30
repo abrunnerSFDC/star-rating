@@ -6,6 +6,8 @@ export default class StarRatingInteractive extends LightningElement {
     @api size;
     @api filledColor;
     @api unfilledColor;
+    @api customFilledUrl;
+    @api customUnfilledUrl;
     @track selectedRating;
     @track stars = new Array();
 
@@ -59,14 +61,16 @@ export default class StarRatingInteractive extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.filledColor
+                        State: this.filledColor,
+                        CustomUrl: this.customFilledUrl
                     }
                 );
             } else {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.unfilledColor
+                        State: this.unfilledColor,
+                        CustomUrl: this.customUnfilledUrl
                     }
                 );
             }
@@ -75,19 +79,27 @@ export default class StarRatingInteractive extends LightningElement {
 
     handleRatingHover(event) {
         for (let i = 0; i < this.totalStars; ++i) {
-            if (i < 1 + +event.target.getAttribute('data-id'))
+            if (i < 1 + +event.target.getAttribute('data-id')) {
                 this.stars[i].State = this.filledColor;
-            else
+                this.stars[i].CustomUrl = this.customFilledUrl;
+            }
+            else {
                 this.stars[i].State = this.unfilledColor;
+                this.stars[i].CustomUrl = this.customUnfilledUrl;
+            }
         }
     }
 
     handleRatingHoverOut() {
         for (let i = 0; i < this.totalStars; ++i) {
-            if (i < this.selectedRating)
+            if (i < this.selectedRating) {
                 this.stars[i].State = this.filledColor;
-            else
+                this.stars[i].CustomUrl = this.customFilledUrl;
+            }
+            else {
                 this.stars[i].State = this.unfilledColor;
+                this.stars[i].CustomUrl = this.customUnfilledUrl;
+            }
         }
     }
 

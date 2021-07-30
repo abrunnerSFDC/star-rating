@@ -6,6 +6,8 @@ export default class StarRating extends LightningElement {
     @api size;
     @api filledColor;
     @api unfilledColor;
+    @api customFilledUrl;
+    @api customUnfilledUrl;
     @track stars = new Array();
 
     connectedCallback() {
@@ -56,14 +58,16 @@ export default class StarRating extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.filledColor
+                        State: this.filledColor,
+                        CustomUrl: this.customFilledUrl
                     }
                 );
             } else {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.unfilledColor
+                        State: this.unfilledColor,
+                        CustomUrl: this.customUnfilledUrl
                     }
                 );
             }
