@@ -8,11 +8,10 @@ Feel free to fork and update/add functionality as you see fit!
 
 ## User Guide
 
-Add to your project's lwc folder and add the `<c-star-rating-container>` element to a parent component. The container can switch between the interactive and static versions of the component by setting the `is-interactive` attribute. Additional attributes can be set in the container component, which will be passed appropriately to the selected version. A description of the available attributes and their usage can be found below.
+Add to your project's lwc folder and add either the `<c-star-rating-interactive>` or `<c-star-rating-static>` element to a parent component. Additional attributes can be set to alter the behavior and appearance of the component. A description of the available attributes and their usage can be found below.
 
 - `rating` (*Integer*) : Sets the number of filled stars to render for the static version, or the default selected rating for the interactive version.
 - `total-stars` (*Integer*) : Sets the total number of stars to render for both versions.
-- `is-interactive` (*Boolean*) : Declare to switch to the interactive version of the component.
 - `size` (*String*) : Determines size of star icons.
   - Possible values: `"xx-small"` `"x-small"` `"small"` `"medium"` (*default*) `"large"`
 - `filled-color` (*String*) : Determines color of filled star icons.
@@ -21,7 +20,7 @@ Add to your project's lwc folder and add the `<c-star-rating-container>` element
   - Possible values: `"grey"` (*default*) `"green"` `"orange"` `"red"` `"white"`
 - `custom-filled-url` (*String*) : URL for custom SVG resource used for filled stars.
 - `custom-unfilled-url` (*String*) : URL for custom SVG resource used for unfilled stars.
-- `onratingclick` (*Function*) : Assign handler function to utilize data passed by an interactive component (Selected rating value held in `event.detail`).
+- `onratingclick` (*Function - Interactive Only*) : Assign handler function to utilize data passed by an interactive component (Selected rating value held in `event.detail`).
 
 ## Known Issues / Potentional Updates
 
