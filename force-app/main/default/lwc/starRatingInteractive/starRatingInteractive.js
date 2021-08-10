@@ -45,29 +45,11 @@ export default class StarRatingInteractive extends LightningElement {
     }
 
     handleRatingHover(event) {
-        for (let i = 0; i < this.totalStars; ++i) {
-            if (i < 1 + +event.target.getAttribute('data-id')) {
-                this.stars[i].State = ICON_COLOR_MAPPING.get(this.filledColor);
-                this.stars[i].CustomUrl = this.customFilledUrl;
-            }
-            else {
-                this.stars[i].State = ICON_COLOR_MAPPING.get(this.unfilledColor);
-                this.stars[i].CustomUrl = this.customUnfilledUrl;
-            }
-        }
+        this.reRenderStars(1 + +event.target.getAttribute('data-id'));
     }
 
     handleRatingHoverOut() {
-        for (let i = 0; i < this.totalStars; ++i) {
-            if (i < this.selectedRating) {
-                this.stars[i].State = ICON_COLOR_MAPPING.get(this.filledColor);
-                this.stars[i].CustomUrl = this.customFilledUrl;
-            }
-            else {
-                this.stars[i].State = ICON_COLOR_MAPPING.get(this.unfilledColor);
-                this.stars[i].CustomUrl = this.customUnfilledUrl;
-            }
-        }
+        this.reRenderStars(this.selectedRating);
     }
 
     handleRatingClick(event) {
@@ -78,5 +60,18 @@ export default class StarRatingInteractive extends LightningElement {
             {detail: this.selectedRating}
         );
         this.dispatchEvent(selectedEvent);
+    }
+
+    reRenderStars = (numberOfFilledStars) => {
+        for (let i = 0; i < this.totalStars; ++i) {
+            if (i < numberOfFilledStars) {
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.filledColor);
+                this.stars[i].CustomUrl = this.customFilledUrl;
+            }
+            else {
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.unfilledColor);
+                this.stars[i].CustomUrl = this.customUnfilledUrl;
+            }
+        }
     }
 }
