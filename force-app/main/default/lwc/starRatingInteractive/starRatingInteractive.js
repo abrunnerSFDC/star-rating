@@ -1,5 +1,13 @@
 import { LightningElement, api, track } from 'lwc';
 
+const ICON_COLOR_MAPPING = new Map([
+    ["grey", "default"],
+    ["green", "success"],
+    ["orange", "warning"],
+    ["red", "error"],
+    ["white", "inverse"],
+]);
+
 export default class StarRatingInteractive extends LightningElement {
     @api defaultRating;
     @api totalStars;
@@ -12,47 +20,6 @@ export default class StarRatingInteractive extends LightningElement {
     @track stars = new Array();
 
     connectedCallback() {
-        switch (this.filledColor) {
-            case "grey":
-                this.filledColor = "default";
-                break;
-            case "green":
-                this.filledColor = "success";
-                break;
-            case "orange":
-                this.filledColor = "warning";
-                break;
-            case "red":
-                this.filledColor = "error";
-                break;
-            case "white":
-                this.filledColor = "inverse";
-                break;
-            default:
-                this.filledColor = "warning";
-                break;
-        }
-
-        switch (this.unfilledColor) {
-            case "grey":
-                this.unfilledColor = "default";
-                break;
-            case "green":
-                this.unfilledColor = "success";
-                break;
-            case "orange":
-                this.unfilledColor = "warning";
-                break;
-            case "red":
-                this.unfilledColor = "error";
-                break;
-            case "white":
-                this.unfilledColor = "inverse";
-                break;
-            default:
-                this.unfilledColor = "default";
-                break;
-        }
 
         this.selectedRating = this.defaultRating;
 
@@ -61,7 +28,7 @@ export default class StarRatingInteractive extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.filledColor,
+                        State: ICON_COLOR_MAPPING.get(this.filledColor),
                         CustomUrl: this.customFilledUrl
                     }
                 );
@@ -69,7 +36,7 @@ export default class StarRatingInteractive extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.unfilledColor,
+                        State: ICON_COLOR_MAPPING.get(this.unfilledColor),
                         CustomUrl: this.customUnfilledUrl
                     }
                 );
@@ -80,11 +47,11 @@ export default class StarRatingInteractive extends LightningElement {
     handleRatingHover(event) {
         for (let i = 0; i < this.totalStars; ++i) {
             if (i < 1 + +event.target.getAttribute('data-id')) {
-                this.stars[i].State = this.filledColor;
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.filledColor);
                 this.stars[i].CustomUrl = this.customFilledUrl;
             }
             else {
-                this.stars[i].State = this.unfilledColor;
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.unfilledColor);
                 this.stars[i].CustomUrl = this.customUnfilledUrl;
             }
         }
@@ -93,11 +60,11 @@ export default class StarRatingInteractive extends LightningElement {
     handleRatingHoverOut() {
         for (let i = 0; i < this.totalStars; ++i) {
             if (i < this.selectedRating) {
-                this.stars[i].State = this.filledColor;
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.filledColor);
                 this.stars[i].CustomUrl = this.customFilledUrl;
             }
             else {
-                this.stars[i].State = this.unfilledColor;
+                this.stars[i].State = ICON_COLOR_MAPPING.get(this.unfilledColor);
                 this.stars[i].CustomUrl = this.customUnfilledUrl;
             }
         }
