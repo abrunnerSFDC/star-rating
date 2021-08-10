@@ -9,11 +9,11 @@ const ICON_COLOR_MAPPING = new Map([
 ]);
 
 export default class StarRatingInteractive extends LightningElement {
-    @api defaultRating;
-    @api totalStars;
-    @api size;
-    @api filledColor;
-    @api unfilledColor;
+    @api defaultRating = 0;
+    @api totalStars = 5;
+    @api size = "medium";
+    @api filledColor = "orange";
+    @api unfilledColor = "grey";
     @api customFilledUrl;
     @api customUnfilledUrl;
     @track selectedRating;

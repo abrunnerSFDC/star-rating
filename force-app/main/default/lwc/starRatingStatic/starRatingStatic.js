@@ -8,12 +8,12 @@ const ICON_COLOR_MAPPING = new Map([
     ["white", "inverse"],
 ]);
 
-export default class StarRating extends LightningElement {
-    @api rating;
-    @api totalStars;
-    @api size;
-    @api filledColor;
-    @api unfilledColor;
+export default class StarRatingStatic extends LightningElement {
+    @api rating = 0;
+    @api totalStars = 5;
+    @api size = "medium";
+    @api filledColor = "orange";
+    @api unfilledColor = "grey";
     @api customFilledUrl;
     @api customUnfilledUrl;
     @track stars = new Array();
@@ -25,16 +25,16 @@ export default class StarRating extends LightningElement {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.filledColor,
-                        CustomUrl: ICON_COLOR_MAPPING.get(this.customFilledUrl)
+                        State: ICON_COLOR_MAPPING.get(this.filledColor),
+                        CustomUrl: this.customFilledUrl
                     }
                 );
             } else {
                 this.stars.push(
                     {
                         Index: i,
-                        State: this.unfilledColor,
-                        CustomUrl: ICON_COLOR_MAPPING.get(this.customUnfilledUrl)
+                        State: ICON_COLOR_MAPPING.get(this.unfilledColor),
+                        CustomUrl: this.customUnfilledUrl
                     }
                 );
             }
